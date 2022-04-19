@@ -79,7 +79,7 @@
                             </div>
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                            <a type="submit" href="/dashboard" class="btn btn-primary btn-block mb-4">Sign in</a>
 
                             <!-- Register buttons -->
                             <div class="text-center">

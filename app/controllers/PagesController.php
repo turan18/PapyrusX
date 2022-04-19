@@ -13,4 +13,10 @@ class PagesController{
     public function register(){
         return view('register');
     }
+    public function dashboard(){
+        return view('dashboard');
+    }
+    public function class_creation(){
+        return view('class_creation');
+    }
 }
