@@ -4,8 +4,10 @@
 
 <?php require 'partials/start_content.php' ?>
 
-
-
+<?php
+    echo $user;
+    var_dump($user);
+?>
 
 <div>
     <a type="submit" href="create-class" class="btn btn-primary btn-block mb-4">Create a Class</a>

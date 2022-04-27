@@ -33,17 +33,17 @@
             <div class="form-container">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" novalidate method="post">
                         <!-- Email input -->
                             <div class="form-outline mb-6">
-                                <input type="text" id="first_name" class="form-control" required />
+                                <input type="text" id="first_name" name="fname" class="form-control" required />
                                 <label class="form-label" for="first_name">First Name</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your first name.</div>
                             </div>
 
                             <div class="form-outline mb-6">
-                                <input type="text" id="last_name" class="form-control" required/>
+                                <input type="text" id="last_name" name="lname" class="form-control" required/>
                                 <label class="form-label" for="last_name">Last Name</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your last name.</div>
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="form-outline mb-6">
-                                <input type="email" id="registerName" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.edu$" required/>
+                                <input type="email" id="registerName" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.edu$" required/>
                                 <label class="form-label" for="registerName">Email</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter a valid .edu email.</div>
@@ -59,7 +59,7 @@
 
                             <!-- Password input -->
                             <div class="form-outline mb-5">
-                                <input type="password" id="registerPassword" class="form-control" minlength="5" required/>
+                                <input type="password" id="registerPassword" name="password" class="form-control" minlength="5" required/>
                                 <label class="form-label" for="registerPassword">Password</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter a valid password (Must be at least 5 characters.)</div>
@@ -71,13 +71,13 @@
                                 <p for="basic-url" class="mb-4 h3">I am a...</p>
                                 <div class="form-outline mb-6">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" required/>
+                                        <input class="form-check-input" type="radio" name="type" value="student" id="flexRadioDefault1" required/>
                                         <label class="form-check-label" for="flexRadioDefault1">Student</label>
                                     </div>
 
                                     <!-- Default checked radio -->
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked required/>
+                                        <input class="form-check-input" type="radio" name="type" value="instructor" id="flexRadioDefault2" checked required/>
                                         <label class="form-check-label" for="flexRadioDefault2">Instructor</label>
                                     </div>
                                 </div>

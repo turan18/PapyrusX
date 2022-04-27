@@ -1,5 +1,6 @@
 <?php 
 namespace App\Core;
+use \App\Trait\{Chainable};
 class QueryBuilder{
 
     protected $pdo;
@@ -7,13 +8,6 @@ class QueryBuilder{
     public function __construct(\PDO $pdo)
     {
         $this->pdo = $pdo;
-    }
-
-    public function selectAllUser($table){
-        $query = $this->pdo->prepare("select * from ${table}");
-        $query->execute();
-        $results = $query->fetchAll(\PDO::FETCH_OBJ);
-        return $results;
     }
     public function insert($table,$parameters){
         $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)"
@@ -25,22 +19,15 @@ class QueryBuilder{
         try{
             $query = $this->pdo->prepare($sql);
             $query->execute($parameters);
+            return $query->fetchAll();
         }
         catch (\PDOException $e){
             var_dump($e);
         }
-        
     }
-    public function addUser($name,$age){
-        try{
-            $query = $this->pdo->prepare("INSERT INTO Users (Username, Age, Member) VALUES (?,?,?)");
-            $query->execute([$name,$age,0]);
-            return 1;
-        }
-        catch (\PDOException $e){
-            return $e;
-        }
-        
-    }
+    public function findWhere($col,$equivalency){
 
+
+        return new Chainable();
+    }
 }
