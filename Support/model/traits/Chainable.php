@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Trait;
+namespace Support\Model\Traits;
 
 class Chainable{
     protected $data;

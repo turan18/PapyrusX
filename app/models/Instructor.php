@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use \App\Traits\{ModelTrait};
+use \Support\Model\Traits\{ModelTrait};
 
 
 class Instructor extends User{

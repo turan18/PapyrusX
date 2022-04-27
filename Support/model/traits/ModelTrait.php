@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace Support\Model\Traits;
 
 trait ModelTrait{
     public static function findByID($id){
