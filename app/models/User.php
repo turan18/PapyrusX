@@ -15,7 +15,9 @@ class User extends Model{
 
         $arr = ["Users",$asso];
         parent::__construct($arr);
-        $this->userObject = $modelObject;
+
+        $user_obj = array_intersect_key($this->modelObject, array_flip( array('email','first_name','last_name') ));
+        $this->userObject = $user_obj;
     }
 
 }

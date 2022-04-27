@@ -15,18 +15,20 @@ class QueryBuilder{
             ,implode(',',array_keys($parameters))
             ,implode(', ',array_map(function($col){return ":${col}";},array_keys($parameters)))
         );
-        // die(var_dump($sql));
+        $retrieve = sprintf("SELECT * from {$table} WHERE id = LAST_INSERT_ID()");
         try{
             $query = $this->pdo->prepare($sql);
+            $retrieveQuery = $this->pdo->prepare($retrieve);
             $query->execute($parameters);
-            return $query->fetchAll();
+            $retrieveQuery->execute();
+            $obj = $retrieveQuery->fetch(\PDO::FETCH_ASSOC);
+            return $obj;
         }
         catch (\PDOException $e){
             var_dump($e);
         }
     }
     public function findWhere($col,$equivalency){
-
 
         return new Chainable();
     }

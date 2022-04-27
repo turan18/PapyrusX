@@ -6,8 +6,8 @@ use \App\Traits\{ModelTrait};
 class Student extends User{
     use ModelTrait;
     public $email;
-    public $fname;
-    public $lname;
+    public $first_name;
+    public $last_name;
 
     protected static $table = "User";
 
@@ -20,10 +20,9 @@ class Student extends User{
               0
             ];
        parent::__construct($arr);
-
-       $this->$email = $userObject->email;
-       $this->$fname = $userObject->fname;
-       $this->$lname = $userObject->lname;
+       $this->email = $this->userObject["email"];
+       $this->first_name = $this->userObject["first_name"];
+       $this->last_name = $this->userObject["last_name"];
 
     }
     public function joinClass($class_id){
