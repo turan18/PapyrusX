@@ -36,14 +36,14 @@
                         <form class="needs-validation" novalidate method="post">
                         <!-- Email input -->
                             <div class="form-outline mb-6">
-                                <input type="text" id="first_name" name="fname" class="form-control" required />
+                                <input type="text" id="first_name" name="first_name" class="form-control" required />
                                 <label class="form-label" for="first_name">First Name</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your first name.</div>
                             </div>
 
                             <div class="form-outline mb-6">
-                                <input type="text" id="last_name" name="lname" class="form-control" required/>
+                                <input type="text" id="last_name" name="last_name" class="form-control" required/>
                                 <label class="form-label" for="last_name">Last Name</label>
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">Please enter your last name.</div>

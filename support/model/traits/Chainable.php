@@ -12,4 +12,7 @@ class Chainable{
         //filter through array data
         return $this;
     }
+    public function get(){
+        return $this->data;
+    }
 }

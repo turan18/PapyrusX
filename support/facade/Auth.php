@@ -1,7 +1,7 @@
 <?php 
 
 namespace Support\Facade;
-
+use \App\Core\App;
 class Auth{
 
     public static function login($user){
@@ -14,5 +14,6 @@ class Auth{
     public static function user(){
         return unserialize($_SESSION['user']);
     }
+
     
 }
