@@ -18,9 +18,6 @@ class Course extends Model{
 
     function __construct($course,$meet_times){
         $obj = parent::makeMany($course,$meet_times,$this->foreign_key);
-        // echo "THIS SI TEH TREURJEKRE";
-        // echo "SJDALJSDLJASDLK";
-        // print_r($obj[1]);
         $this->id = $obj[0]["id"];
         $this->instructor_id = $obj[0]["instructor_id"];
         $this->name = $obj[0]["class_name"];
