@@ -16,16 +16,53 @@ class Course extends Model{
     public $start_time; 
     public $end_time; 
 
-    function __construct($course,$meet_times){
-        $obj = parent::makeMany($course,$meet_times,$this->foreign_key);
-        $this->id = $obj[0]["id"];
-        $this->instructor_id = $obj[0]["instructor_id"];
-        $this->name = $obj[0]["class_name"];
-        $this->description = $obj[0]["description"];
-        $this->days = array_keys(array_filter($obj[1], function($v, $k) {
-            return (($k != 'id' || $k != 'course_id') && $v == 1);
-        }, ARRAY_FILTER_USE_BOTH));
-        $this->start_time = $obj[1]["start_time"]; 
-        $this->end_time = $obj[1]["end_time"]; 
+
+    function __construct($course = null,$meet_times = null){
+        if($course != null && $meet_times != null){
+            $obj = parent::makeMany($course,$meet_times,$this->foreign_key);
+            $this->id = $obj[0]["id"];
+            $this->instructor_id = $obj[0]["instructor_id"];
+            $this->name = $obj[0]["class_name"];
+            $this->description = $obj[0]["description"];
+            $this->days = array_keys(array_filter($obj[1], function($v, $k) {
+                return (($k != 'id' || $k != 'course_id') && $v == 1);
+            }, ARRAY_FILTER_USE_BOTH));
+            $this->start_time = $obj[1]["start_time"]; 
+            $this->end_time = $obj[1]["end_time"]; 
+        }
+ 
+    }
+
+    public static function set(array $dependencies){
+        unset($dependencies["id"]);
+        $obj = [
+            "id" => $dependencies["course_id"],
+            "instructor_id" => $dependencies["instructor_id"],
+            "name" => $dependencies["class_name"],
+            "description" => $dependencies["description"],
+            "days" => array_keys(array_filter($dependencies, function($v, $k) {
+                return (($k != 'id' || $k != 'course_id') && $v == 1);
+            }, ARRAY_FILTER_USE_BOTH)),
+            "start_time" => $dependencies["start_time"],
+            "end_time" => $dependencies["end_time"],
+        ];
+        $course = new static();
+        $course->id = $obj["id"];
+        $course->instructor_id = $obj["instructor_id"];
+        $course->name = $obj["name"];
+        $course->description = $obj["description"];
+        $course->days = $obj["days"];
+        $course->start_time = $obj["start_time"];
+        $course->end_time = $obj["end_time"];
+        
+        return $course;
+    }
+    public static function getStudents($course_id){
+        $students = Roster::findWhere(array(['course_id','=',$course_id]))->with('Users','student_id','id')->get();
+        $results = [];
+        foreach($students as $student){
+            array_push($results,Student::set($student));
+        }
+        return $results;
     }
 }

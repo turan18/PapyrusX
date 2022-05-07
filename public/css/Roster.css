@@ -1,0 +1,53 @@
+.flex-container {
+    display: flex;
+    width: 60vw;
+    height: 70vh;
+    margin: auto;
+}
+
+.flex-child {
+    flex: 1;
+    background-color: black;
+    color: white;
+}  
+
+.flex-child:first-child {
+    margin-right: 20px;
+} 
+
+.innerdiv{
+    width: 25vw;
+    height: 57vh;
+    padding-left: 5%;
+    overflow: auto;
+    text-overflow: ellipsis;
+}
+
+.search{
+    margin-left: 5%;
+    margin-bottom: 1%;
+    width: 24vw;
+}
+
+li{
+    background-color: white;
+    color: black;
+    list-style: none;
+    height: 2vh;
+}
+li:nth-child(odd) { 
+    background: lightgray; 
+}
+
+.addbutton{
+    float: right;
+    height: 2vh;
+}
+
+.subbut {
+    display: flex;
+    margin: auto;
+    margin-top: 1%;
+    background-color: blue;
+    color: white;
+}

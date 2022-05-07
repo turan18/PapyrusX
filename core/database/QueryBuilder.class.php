@@ -10,6 +10,7 @@ class QueryBuilder{
         $this->pdo = $pdo;
     }
     public function insert($table,$parameters){
+   
         $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)"
             ,$table
             ,implode(',',array_keys($parameters))
@@ -28,6 +29,19 @@ class QueryBuilder{
             var_dump($e);
         }
     }
+    public function get($query){
+        $q = $this->pdo->prepare($query);
+        try{
+            $q->execute();
+        }
+        catch (\PDOException $e){
+            var_dump($e);
+        }
+        
+        return $q->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
     public function insertWith($table_1,$table_2,$f_key){
         
         $data = $this->insert(array_key_first($table_1),reset($table_1));
@@ -40,9 +54,11 @@ class QueryBuilder{
         
     }
     public function insertMany($data){
-        foreach($data as $table_name=>$values){
+       foreach($data as $inserts){
+        foreach($inserts as $table_name=>$values){
             $this->insert($table_name,$values);
         }
+       }
     }
     
     public function validateClassCreation($data){
@@ -79,8 +95,12 @@ class QueryBuilder{
         
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
-    public function findWhere($col,$equivalency){
-
-        return new Chainable();
+    public function findWhere($table_name,$col,$equivalency,$val){
+        $sql = sprintf("SELECT * from %s WHERE %s %s %s",$table_name,$col,$equivalency,$val);
+        $query = $this->pdo->prepare($sql);
+        $query->debugDumpParams();
+        die();
+        $query->execute();
+        return new Chainable($query->fetchAll());
     }
 }
