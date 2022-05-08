@@ -28,9 +28,8 @@ class Router{
             $this->callAction(...explode("@",$this->routes[$method][$uri]));
             // return $this->routes[$method][$uri];
         }else{
-            throw new \Exception("No routes defined for this URI.");
+            return view("404");
         }
-        // return $this->routes["error"];
      
     }
 

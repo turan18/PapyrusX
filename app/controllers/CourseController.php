@@ -37,41 +37,54 @@ class CourseController{
         }
     }
     public function show(){
-        $course_id = $_GET["id"];
-        $current_students = Course::getStudents($course_id);
-        return view('course',compact("current_students"));
+        session_start();
+        if(Auth::user() != null){
+            $course_id = $_GET["id"];
+            $current_students = Course::getStudents($course_id);
+            return view('course',compact("current_students"));
+        }else{
+            redirect('login');
+        }
+
     }
     public function update(){
-        $course_id = $_GET["id"];
+        session_start();
 
-        $current_students = Course::getStudents($course_id);
-        $invited = Invitation::findWhere(array(array('course_id','=',$course_id)))->with("Users","to_student_id","id")->get();
-        $invited_students = [];
-        foreach($invited as $student){
-            array_push($invited_students,Student::set($student));
-        }
+        if(Auth::user()!=null){
+            $course_id = $_GET["id"];
 
-        $to_remove = array_merge($current_students,$invited_students);
-        
-        $remove_query = [];
-        foreach($to_remove as $student){
-            $query = explode(" ","id != {$student->id}");
-            array_push($remove_query,$query);
-        }
-
-        $remove_query[] = array('type','=','0');
-
-
-        $invitable_students = [];
-        
-        if($remove_query > 0){
-            $students = Student::findWhere($remove_query)->get();
-            foreach($students as $student){
-                array_push($invitable_students,Student::set($student));
+            $current_students = Course::getStudents($course_id);
+            $invited = Invitation::findWhere(array(array('course_id','=',$course_id)))->with("Users","to_student_id","id")->get();
+            $invited_students = [];
+            foreach($invited as $student){
+                array_push($invited_students,Student::set($student));
             }
+    
+            $to_remove = array_merge($current_students,$invited_students);
+            
+            $remove_query = [];
+            foreach($to_remove as $student){
+                $query = explode(" ","id != {$student->id}");
+                array_push($remove_query,$query);
+            }
+    
+            $remove_query[] = array('type','=','0');
+    
+    
+            $invitable_students = [];
+            
+            if($remove_query > 0){
+                $students = Student::findWhere($remove_query)->get();
+                foreach($students as $student){
+                    array_push($invitable_students,Student::set($student));
+                }
+            }
+         
+            return view('edit',compact("invitable_students","invited_students"));
+        }else{
+            redirect('login');
         }
-     
-        return view('edit',compact("invitable_students","invited_students"));
+  
     }
 
 

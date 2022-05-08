@@ -20,4 +20,5 @@
     rel="stylesheet"
     />    
     <title>PapyrusX</title>
+    <script src="public/js/flash.js" defer></script>
 

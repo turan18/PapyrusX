@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 use App\Core\App;
-use \Support\Facade\{Auth,Validator};
+use \Support\Facade\{Auth,Validator,Session};
 use \App\Models\{Student,Instructor};
 
 class SessionController{
@@ -18,10 +18,12 @@ class SessionController{
             Auth::login($user);
             redirect('dashboard');
         }else{
-            return view('404'); 
+            Session::flash("Error","Login Failed",5);
+            redirect('login'); 
         }
     }
     public function delete(){
         Auth::logout();
+        redirect('login');
     }
 }

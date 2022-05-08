@@ -16,6 +16,6 @@ class Auth{
         // session_start();
         return Session::get('user');
     }
-
+   
     
 }

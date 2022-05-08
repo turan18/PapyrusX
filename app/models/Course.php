@@ -10,6 +10,7 @@ class Course extends Model{
 
     public $id;
     public $instructor_id;
+    public $instructor_name;
     public $name;
     public $description;
     public $days = [];
@@ -35,20 +36,25 @@ class Course extends Model{
 
     public static function set(array $dependencies){
         unset($dependencies["id"]);
+        if(array_key_exists("first_name",$dependencies)){
+            $name = $dependencies["first_name"] . " " . $dependencies["last_name"];
+        }
         $obj = [
             "id" => $dependencies["course_id"],
             "instructor_id" => $dependencies["instructor_id"],
+            "instructor_name" => $name ?? "",
             "name" => $dependencies["class_name"],
             "description" => $dependencies["description"],
             "days" => array_keys(array_filter($dependencies, function($v, $k) {
                 return (($k != 'id' || $k != 'course_id') && $v == 1);
             }, ARRAY_FILTER_USE_BOTH)),
-            "start_time" => $dependencies["start_time"],
-            "end_time" => $dependencies["end_time"],
+            "start_time" => date("h:i A",strtotime($dependencies["start_time"])),
+            "end_time" => date("h:i A",strtotime($dependencies["end_time"])),
         ];
         $course = new static();
         $course->id = $obj["id"];
         $course->instructor_id = $obj["instructor_id"];
+        $course->instructor_name = $obj["instructor_name"];
         $course->name = $obj["name"];
         $course->description = $obj["description"];
         $course->days = $obj["days"];

@@ -18,12 +18,14 @@ class Student extends User{
     }
     public function getAllClasses(){
         $f_key = (new \ReflectionClass('\App\Models\Course'))->getDefaultProperties()['foreign_key'];
-        $courses = Course::findWhere(array(array('instructor_id','=',$this->id)))->with("Meet_Times",'id',$f_key)->get(); 
+        $courses = Roster::findWhere(array(array('student_id','=',$this->id)))->with("Courses",$f_key,'id')->with("Meet_Times","id",$f_key)->with("Users","instructor_id","id","Courses")->get(); 
     
         $data = [];
         foreach($courses as $course){
             array_push($data,Course::set($course));
         }
+
+        
         return $data;
     }
     public function joinCourse($course_id){
@@ -31,19 +33,14 @@ class Student extends User{
             "course_id" => $course_id,
             "student_id" => $this->id
         ];
-        Roster::insert($data)->get();
+        Roster::insert(null,array($data));
     }
 
     public function removeInvite($id){
-        Student::remove("Invitations",$id)->get();
+        Student::remove("Invitations",array(array("id","=",$id)))->get();
     }
 
     public function acceptInvite($invitation_id,$instructor_id,$course_id){
-        $data = [
-            "from_instructor_id" > $instructor_id,
-            "to_student_id" => $this->id,
-            "course_id" => $course_id
-        ];
         $this->joinCourse($course_id);
         $this->removeInvite($invitation_id);
     }

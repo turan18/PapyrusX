@@ -20,7 +20,7 @@ class QueryBuilder{
         try{
             $query = $this->pdo->prepare($sql);
             $retrieveQuery = $this->pdo->prepare($retrieve);
-            $query->execute($parameters);
+            $query->execute($parameters); 
             $retrieveQuery->execute();
             $obj = $retrieveQuery->fetch(\PDO::FETCH_ASSOC);
             return $obj;

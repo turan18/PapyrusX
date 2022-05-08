@@ -2,7 +2,7 @@
     if(!isset($_SESSION)){
         session_start(); 
     }
-    if(!auth()){
+    if(auth() == null){
         redirect('/');
     }
 

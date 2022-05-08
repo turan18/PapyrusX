@@ -2,6 +2,7 @@
 <?php require 'partials/head.php' ?>
 <link href="public/css/Class_Creation.css" rel="stylesheet" type="text/css">
 <?php require 'partials/start_content.php' ?>
+<?php require 'components/navbar.php' ?>
 
 <div class="form-container">
     <h1 class="title">Create a Class</h1>
@@ -173,5 +174,6 @@
 </div>
 
 
-
+<script src="public/js/flash.js"></script>
+<?php require 'components/flash.php' ?>
 <?php require 'partials/footer.php' ?>

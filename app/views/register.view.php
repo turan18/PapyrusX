@@ -7,7 +7,7 @@
 <?php require 'partials/start_content.php' ?>
 
 
-<main class="content">
+<main class="content position-relative">
     <section class="welcome-info">
         
     </section>
@@ -93,5 +93,7 @@
         </div>
     </section>
 </main>
+<script src="public/js/flash.js"></script>
+<?php require 'components/flash.php' ?>
 
 <?php require 'partials/footer.php' ?>

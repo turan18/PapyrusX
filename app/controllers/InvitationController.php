@@ -31,6 +31,18 @@ class InvitationController{
         redirect("course-edit?name={$name}&id={$course_id}");
     }
     public function delete(){
+        session_start();
+        $data = json_decode(file_get_contents('php://input'), true);
+        $student_id = Auth::user()->id;
+        $instructor_id = $data["instructor_id"];
+        $course_id = $data["course_id"];
+        $invitation_id = Invitation::findWhere(array(array('from_instructor_id','=',$instructor_id),
+                                            array('to_student_id','=',$student_id),
+                                            array('course_id','=',$course_id)))->get()[0]["id"];
 
+        Auth::user()->removeInvite($invitation_id);
+        
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([""=>"Invitation Removed"]);
     }
 }
