@@ -15,7 +15,7 @@ class User extends Model{
             "email" => $dependencies[0],
             "first_name" => $dependencies[1],
             "last_name" => $dependencies[2],
-            "password" => $dependencies[3],
+            "password" => password_hash($dependencies[3],PASSWORD_BCRYPT),
             "type" => $dependencies[4]
         ];
 

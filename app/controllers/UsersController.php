@@ -4,7 +4,7 @@
 namespace App\Controllers;
 use \App\Core\App;
 use \App\Models\{Student,Instructor};
-use \Support\Facade\{Auth,Validator};
+use \Support\Facade\{Auth,Validator,Session};
 class UsersController{
     
     public function store(){
@@ -19,7 +19,8 @@ class UsersController{
             Auth::login($user);
             redirect('dashboard');
         }else{
-            return view('404');
+            Session::flash("Error","Registration failed.");
+            redirect('/register');
         }
   
     }

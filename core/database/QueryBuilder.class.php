@@ -75,15 +75,16 @@ class QueryBuilder{
         $this->insert();
     }
     public function validateLogin($data){
-        $sql = "SELECT id, email, first_name, last_name FROM Users WHERE email = :email AND password = :password AND type = :type";
+        $sql = "SELECT * FROM Users WHERE email = :email AND type = :type";
         $query = $this->pdo->prepare($sql);
-        $query->bindParam(":email",$data["email"]);
-        $query->bindParam(":password",$data["password"]);
-        $query->bindParam(":type",$data["type"]);
+        $query->bindValue(":email",$data["email"]);
+        $query->bindValue(":type",$data["type"]);
         $query->execute();
-
         $results = $query->fetchAll(\PDO::FETCH_ASSOC);
-        return (count($results) > 0 )? $results[0] : [];
+        if(count($results) > 0){
+            $matching = password_verify($data["password"],$results[0]["password"]);
+        }
+        return (count($results) > 0 && $matching == true)? $results[0] : [];
 
     }
     public function validateRegister($data){

@@ -15,12 +15,11 @@
 
                 <input type="text" id="search" onkeyup="search(event)">
                 <form method="POST">
-
                     <div class="innerdiv">
-                    <div id="all_students">
 
+                    <div id="all_students">
                         <?php foreach($invitable_students as $student) : ?>
-                            <li id="<?= $student->id ?>"><?=$student->first_name ?><input type="checkbox" value="<?=$student->id?>" name="students[]" class="addbutton"></input></li>
+                            <li class="students" id="<?= $student->id ?>"><?=$student->first_name ?><input type="checkbox" value="<?=$student->id?>" name="students[]" class="addbutton"></input></li>
                         <?php endforeach ?>
                         </div>
                     </div>
