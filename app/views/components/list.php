@@ -4,7 +4,7 @@
       <div class="text-muted"><?= $student->email ?></div>
     </div>
     <?php if(auth()->type == 1) : ?>
-        <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" value=<?=$student->id?>  name="students[]" />
-        <label class="btn btn-danger" for="btn-check">Remove Student</label>
+        <input type="checkbox" class="btn-check" id="btn-check-<?=$student->id ?>" autocomplete="off" value=<?=$student->id?>  name="students[]" />
+        <label class="btn btn-danger" for="btn-check-<?=$student->id ?>">Remove Student</label>
     <?php endif?>
   </li>

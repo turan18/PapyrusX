@@ -18,7 +18,7 @@ class SessionController{
             Auth::login($user);
             redirect('dashboard');
         }else{
-            Session::flash("Error","Login Failed",5);
+            Session::flash("Error","Login Failed");
             redirect('login'); 
         }
     }

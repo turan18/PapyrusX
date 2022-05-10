@@ -90,17 +90,14 @@ class QueryBuilder{
     public function validateRegister($data){
         $sql = "SELECT * FROM Users WHERE email = :email AND type = :type";
         $query = $this->pdo->prepare($sql);
-        $query->bindParam(":email",$data["email"]);
-        $query->bindParam(":type",$data["type"]);
+        $query->bindValue(":email",$data["email"]);
+        $query->bindValue(":type",$data["type"]);
         $query->execute();
-        
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
     public function findWhere($table_name,$col,$equivalency,$val){
         $sql = sprintf("SELECT * from %s WHERE %s %s %s",$table_name,$col,$equivalency,$val);
         $query = $this->pdo->prepare($sql);
-        $query->debugDumpParams();
-        die();
         $query->execute();
         return new Chainable($query->fetchAll());
     }

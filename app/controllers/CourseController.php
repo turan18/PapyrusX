@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 use App\Core\App;
-use \Support\Facade\{Auth,Validator};
+use \Support\Facade\{Auth,Validator,Session};
 use \App\Models\{Student,Instructor,Course,Invitation};
 
 class CourseController{
@@ -33,7 +33,8 @@ class CourseController{
             Auth::user()->createClass($course,$meet_times);
             redirect('dashboard');
         }else{
-            return view('404');
+            Session::flash("Error","Invalid details.");
+            redirect('create-class');
         }
     }
     public function show(){

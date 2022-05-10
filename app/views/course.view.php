@@ -23,7 +23,7 @@
             <form method="POST" class="d-flex flex-column">
             <ul class="list-group list-group-light" id="all_students">
                 <?php foreach($current_students as $student) : ?>
-                  <?php require 'list.php' ?>
+                  <?php require 'components/list.php' ?>
                 <?php endforeach ?>
                 <?php if(auth()->type == 1) : ?>
                 <?php endif?>
