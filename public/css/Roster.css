@@ -1,4 +1,4 @@
-.flex-container {
+/* .flex-container {
     display: flex;
     width: 60vw;
     height: 70vh;
@@ -13,9 +13,9 @@
 
 .flex-child:first-child {
     margin-right: 20px;
-} 
+}  */
 
-.innerdiv{
+/* .innerdiv{
     width: 25vw;
     height: 57vh;
     padding-left: 5%;
@@ -39,10 +39,10 @@ li:nth-child(odd) {
     background: lightgray; 
 } */
 
-.addbutton{
+/* .addbutton{
     float: right;
     height: 2vh;
-}
+} 
 
 .subbut {
     display: flex;
@@ -50,4 +50,4 @@ li:nth-child(odd) {
     margin-top: 1%;
     background-color: blue;
     color: white;
-}
+} */

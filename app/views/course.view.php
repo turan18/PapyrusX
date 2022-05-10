@@ -7,36 +7,38 @@
 <?php require 'components/navbar.php' ?>
 
 
+<!-- $course_info->instructor_name -->
 
-<?php if(auth()->type == 1) : ?>
-  <a href="course-edit?name=<?=$_GET["name"]?>&id=<?=$_GET["id"]?>">Edit</a>
-<?php endif?>
 
-		<div class="flex-container">
-		  <div class="flex-child">
-			<h2>All Students</h2>
-            <input type="text" id="search" onkeyup="search(event)">
-            <div class="innerdiv">
-            <form method="POST">
-              <div id="all_students">
+    <h1 class="text-center"><?php echo $course_info->name ?> - <?php echo $course_info->instructor_name ?></h1>
+
+		<div class="flex-container py-4">
+		  <div class="flex-child d-flex flex-column align-items-center w-100">
+        <h3>All Students</h3>
+        <input type="text" class="w-50 px-2 py-1" id="search" onkeyup="search(event)" placeholder="Search for students...">
+		  </div>
+		</div>
+    <div class="d-flex w-100 justify-content-center">
+        <div class="w-50 all_students">
+            <form method="POST" class="d-flex flex-column">
+            <ul class="list-group list-group-light" id="all_students">
                 <?php foreach($current_students as $student) : ?>
-                    <li class="students" id="<?= $student->id ?>"><?=$student->first_name ?>
-                    <?php if(auth()->type == 1) : ?>
-
-                    <input type="checkbox" value=<?=$student->id?> name="students[]" class="addbutton" />
-                    <?php endif?>
-
-                  </li>
-                    </div>
+                  <?php require 'list.php' ?>
                 <?php endforeach ?>
                 <?php if(auth()->type == 1) : ?>
-                 <button type="submit" class="submit">Submit Changes</button>
                 <?php endif?>
+            </ul>
+            <div class="d-flex w-100 justify-content-end py-3">
+                  <button type="submit" class="submit btn-primary btn me-2">Remove Selected</button>
+                  <?php if(auth()->type == 1) : ?>
+                  <a class="btn btn-primary"href="course-edit?name=<?=$_GET["name"]?>&id=<?=$_GET["id"]?>">Add Students</a>
+                <?php endif?> 
+                </div>
             </form>
 
             </div>
-		  </div>
-		</div>
+
+      </div>
 
 <script src="public/js/search.js"></script>
 

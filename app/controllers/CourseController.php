@@ -40,8 +40,12 @@ class CourseController{
         session_start();
         if(Auth::user() != null){
             $course_id = $_GET["id"];
+            $course_info = Course::set(Course::findWhere(array(array('Courses.id','=',$course_id)))
+                                        ->with("Meet_Times","id","course_id")
+                                        ->with("Users","instructor_id","id","Courses")->get()[0]);
             $current_students = Course::getStudents($course_id);
-            return view('course',compact("current_students"));
+
+            return view('course',compact("current_students","course_info"));
         }else{
             redirect('login');
         }
